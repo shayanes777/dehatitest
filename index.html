@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منوی بستنی دهاتی</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      direction: rtl;
+      margin: 0;
+      padding: 1rem;
+      background: #fff;
+    }#category-buttons,
+#subcategory-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #999;
+  background: white;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+button.active {
+  background: #a1001c;
+  color: white;
+  border-color: #a1001c;
+}
+
+#products-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.product-card {
+  width: calc(50% - 0.5rem);
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.product-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.product-card p {
+  margin: 0;
+  color: #444;
+}
+
+  </style>
+</head>
+<body>
+  <!-- ردیف A -->
+  <div id="category-buttons">
+    <button data-category="icecream">بستنی</button>
+    <button data-category="hot">بار گرم</button>
+    <button data-category="cold">بار سرد</button>
+  </div> <!-- ردیف B --> <div id="subcategory-buttons"></div> <!-- ردیف C --> <div id="products-container"></div> <script>
+    const data = {
+      icecream: {
+        subcategories: {
+          classic: {
+            name: "بستنی سنتی",
+            products: [
+              { name: "اسپرسو 100% عربیکا", price: "70.000" },
+              { name: "اسپرسو 50% عربیکا", price: "70.000" }
+            ]
+          },
+          cake: {
+            name: "کیک بستنی",
+            products: [
+              { name: "کیک شکلاتی", price: "80.000" },
+              { name: "کیک توت‌فرنگی", price: "85.000" }
+            ]
+          }
+        }
+      },
+      hot: {
+        subcategories: {
+          coffee: {
+            name: "قهوه",
+            products: [
+              { name: "لاته", price: "55.000" },
+              { name: "کاپوچینو", price: "60.000" }
+            ]
+          }
+        }
+      },
+      cold: {
+        subcategories: {
+          juice: {
+            name: "آبمیوه طبیعی",
+            products: [
+              { name: "آب پرتقال", price: "40.000" },
+              { name: "آب هندوانه", price: "35.000" }
+            ]
+          }
+        }
+      }
+    };
+
+    const categoryButtons = document.querySelectorAll('#category-buttons button');
+    const subcategoryContainer = document.getElementById('subcategory-buttons');
+    const productsContainer = document.getElementById('products-container');
+
+    function renderSubcategories(categoryKey) {
+      subcategoryContainer.innerHTML = '';
+      const subcategories = data[categoryKey].subcategories;
+      for (let key in subcategories) {
+        const btn = document.createElement('button');
+        btn.textContent = subcategories[key].name;
+        btn.dataset.subcategory = key;
+        btn.onclick = () => {
+          renderProducts(categoryKey, key);
+          highlightActiveButton(subcategoryContainer, btn);
+        };
+        subcategoryContainer.appendChild(btn);
+      }
+
+      const firstKey = Object.keys(subcategories)[0];
+      renderProducts(categoryKey, firstKey);
+      subcategoryContainer.firstChild.classList.add('active');
+    }
+
+    function renderProducts(categoryKey, subKey) {
+      productsContainer.innerHTML = '';
+      const products = data[categoryKey].subcategories[subKey].products;
+      for (let item of products) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `<h4>${item.name}</h4><p>${item.price} تومان</p>`;
+        productsContainer.appendChild(card);
+      }
+    }
+
+    function highlightActiveButton(container, activeBtn) {
+      [...container.children].forEach(btn => btn.classList.remove('active'));
+      activeBtn.classList.add('active');
+    }
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        highlightActiveButton(document.getElementById('category-buttons'), btn);
+        renderSubcategories(btn.dataset.category);
+      });
+    });
+
+    // انتخاب اولیه دسته اول
+    categoryButtons[0].click();
+  </script></body>
+</html>

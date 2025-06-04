@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fa">
+<!DOCTYPE html><html lang="fa-IR" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,16 +21,31 @@
 }
     body {
       font-family: farhang;
-      direction: rtl;
       margin: 0;
       padding: 1rem;
       background: #fff;
-    }#category-buttons,
+    }
+    #category-buttons{
+      display: flex;
+  justify-content: space-between; 
+  margin-bottom: 2rem;
+  width: 100%;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+    }
 #subcategory-buttons {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  overflow-x: auto;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  font-size: 1.3rem;
+  border: 1px solid var(--blue);
+  background-color: var(--white);
+  color: var(--blue);
+  border-radius: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 30%;
 }
 
 button {
@@ -70,10 +85,29 @@ button.active {
   margin: 0;
   color: #444;
 }
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 20px;
+  background: url('IMG_20250603_163949_888.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 15rem;
+}
 
+@media(min-width: 768px) {
+  .body-inner{
+    padding: 2rem;
+  }
+}
+
+@media(min-width: 1024px) {
+ 
+}
   </style>
 </head>
 <body>
+  <section class="body-inner">
   <header>
         <div class="menu-icon">☰</div>
         <div class="logo"><img src="dehati-logo.png" alt="" height="50px"></div>
@@ -178,5 +212,10 @@ button.active {
 
     // انتخاب اولیه دسته اول
     categoryButtons[0].click();
-  </script></body>
+  </script>
+  </section>
+  <footer>
+        
+      </footer>
+</body>
 </html>

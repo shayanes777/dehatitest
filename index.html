@@ -112,7 +112,7 @@ button.active {
   border-bottom: 2px solid #eee;
 }
 
-.product-card {
+.card { 
   margin-bottom: 2.5rem;
   width: 48%;
   border-radius: 1rem;
@@ -124,13 +124,47 @@ button.active {
   cursor: pointer;
   height: 20rem;
 }
-.image-container img {
+
+.card:focus .card-inner h3, .card:hover .card-inner h3 , .card:focus .card-inner p, .card:hover .card-inner p , .card:focus .card-price span, .card:hover .card-price span{
+  color: var(--red);
+}
+
+.card:focus .card-price span, .card:hover .card-price span{
+  color: var(--blue);
+}
+/*
+.card::before{
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: var(--blue);
+  height: 30%;
+  width: 100%;
+  border-radius: 1rem 1rem 50% 50%;
+}
+*/
+
+.card .image-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 0.8rem 0 1rem 0;
+  width: 100%;
+  height: 10rem;
+  box-shadow: rgba(255, 0, 0, 0.1)0px 2px;
+}
+.card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: relative;
 }
-    .product-card{
+
+.card-inner{
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -141,19 +175,19 @@ button.active {
   height: 6rem;
   }
 
-.product-card h4 {
+.card-inner h3 {
   font-size: 1.2rem; 
   color: var(--blue);
   text-align: right;
   height: 3rem;
 }
 
-.product-card p {
+.card-inner p {
   font-size: 0.8rem;
   color: var(--blue);
   text-align: right;
 }
-    .card-price{
+.card-price{
   width: 100%;
   padding: 0.5rem;
   display: flex;
@@ -292,14 +326,16 @@ footer {
       for (let item of products) {
         const card = document.createElement('div');
         card.className = 'product-card';
-        card.innerHTML = `<div class="image-container">
+        card.innerHTML = `<div class="card">
+          <div class="image-container">
             <img src="menu-item.png" alt="Coffee"/>
           </div>
             <div class="card-inner">
                 <h3>${item.name}</h3>
                 <p>${item.subname}</p>
             </div>
-            <div class="card-price"><span>${item.price} تومان</span></div> `;
+            <div class="card-price"><span>${item.price} تومان</span></div>  
+        </div> `;
         productsContainer.appendChild(card);
       }
     }

@@ -105,27 +105,52 @@ button.active {
 
 #products-container {
   display: flex;
+    justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  margin-top: 3rem;
+  border-bottom: 2px solid #eee;
 }
 
 .product-card {
-  width: calc(50% - 0.5rem);
-  border: 1px solid #eee;
+  margin-bottom: 2.5rem;
+  width: 48%;
   border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 0 0 1.5rem 0; 
+  text-align: center;
+  background-color: var(--white); 
+  position: relative;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  cursor: pointer;
+  height: 20rem;
 }
 
 .product-card h4 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
+  font-size: 1.2rem; 
+  color: var(--blue);
+  text-align: right;
+  height: 3rem;
 }
 
 .product-card p {
-  margin: 0;
-  color: #444;
+  font-size: 0.8rem;
+  color: var(--blue);
+  text-align: right;
 }
+    .card-price{
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.card-price span{
+  color: var(--blue);
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: left;
+}
+
 footer {
   margin-top: 2rem;
   text-align: center;
@@ -185,15 +210,15 @@ footer {
           classic: {
             name: "بستنی سنتی",
             products: [
-              { name: "اسپرسو 100% عربیکا", price: "70.000" },
-              { name: "اسپرسو 50% عربیکا", price: "70.000" }
+              { name: "اسپرسو 100% عربیکا", subname:"دبل", price: "70.000" },
+              { name: "اسپرسو 50% عربیکا", subname:"دبل", price: "70.000" }
             ]
           },
           cake: {
             name: "کیک بستنی",
             products: [
-              { name: "کیک شکلاتی", price: "80.000" },
-              { name: "کیک توت‌فرنگی", price: "85.000" }
+              { name: "کیک شکلاتی", subname:"شکلاتی", price: "80.000" },
+              { name: "کیک توت‌فرنگی", subname:"شکلاتی", price: "85.000" }
             ]
           }
         }
@@ -203,8 +228,8 @@ footer {
           coffee: {
             name: "قهوه",
             products: [
-              { name: "لاته", price: "55.000" },
-              { name: "کاپوچینو", price: "60.000" }
+              { name: "لاته", subname:"دبل", price: "55.000" },
+              { name: "کاپوچینو", subname:"دبل", price: "60.000" }
             ]
           }
         }
@@ -214,8 +239,8 @@ footer {
           juice: {
             name: "آبمیوه طبیعی",
             products: [
-              { name: "آب پرتقال", price: "40.000" },
-              { name: "آب هندوانه", price: "35.000" }
+              { name: "آب پرتقال", subname:"دبل", price: "40.000" },
+              { name: "آب هندوانه", subname:"دبل", price: "35.000" }
             ]
           }
         }
@@ -251,7 +276,14 @@ footer {
       for (let item of products) {
         const card = document.createElement('div');
         card.className = 'product-card';
-        card.innerHTML = `<h4>${item.name}</h4><p>${item.price} تومان</p>`;
+        card.innerHTML = `<div class="image-container">
+            <img src="menu-item.png" alt="Coffee"/>
+          </div>
+            <div class="card-inner">
+                <h3>${item.name}</h3>
+                <p>${item.subname}</p>
+            </div>
+            <div class="card-price"><span>${item.price} تومان</span></div> `;
         productsContainer.appendChild(card);
       }
     }
